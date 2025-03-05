@@ -1,0 +1,104 @@
+identity:
+  name: extract-json-yaml
+  author: eliyar-eziz
+  label:
+    en_US: Extract JSON/YAML & Next Step
+    zh_Hans: 提取 JSON/YAML & 下一步
+    pt_BR: Extrair JSON/YAML & Next Step
+description:
+  human:
+    en_US: Extract and parse JSON or YAML code blocks from Markdown text, and extract the next step
+    zh_Hans: 从 Markdown 文本中提取并解析 JSON 或 YAML 代码块, 并提取下一步
+    pt_BR: Extrair e analisar blocos de código JSON ou YAML de texto Markdown, e extrair o próximo passo
+  llm: Extracts and parses JSON or YAML code blocks from Markdown text, returning the structured data as a response. Extracts the next step from the structured data.
+parameters:
+  - name: markdown_text
+    type: string
+    required: true
+    label:
+      en_US: markdown_text
+      zh_Hans: markdown_text
+      pt_BR: markdown_text
+    human_description:
+      en_US: The Markdown text containing JSON or YAML code blocks to extract
+      zh_Hans: 包含要提取的 JSON 或 YAML 代码块的 Markdown 文本
+      pt_BR: O texto Markdown contendo blocos de código JSON ou YAML para extrair
+    llm_description: The Markdown text containing JSON or YAML code blocks to extract
+    form: llm
+  - name: format_type
+    type: select
+    required: true
+    options:
+      - value: json
+        label:
+          en_US: json
+          zh_Hans: json
+          ja_JP: json
+          pt_BR: json
+      - value: yaml
+        label:
+          en_US: yaml
+          zh_Hans: yaml
+          ja_JP: yaml
+          pt_BR: yaml
+    default: json
+    label:
+      en_US: Format Type
+      zh_Hans: 格式类型
+      pt_BR: Tipo de Formato
+    human_description:
+      en_US: The format type to extract (json or yaml)
+      zh_Hans: 要提取的格式类型（json 或 yaml）
+      pt_BR: O tipo de formato a ser extraído (json ou yaml)
+    llm_description: The format type to extract (json or yaml)
+    form: form
+  - name: mode
+    type: select
+    required: false
+    options:
+      - value: first_one
+        label:
+          en_US: First One
+          zh_Hans: First One
+          pt_BR: Primeiro
+      - value: exact_one
+        label:
+          en_US: Exact One
+          zh_Hans: Exact One
+          pt_BR: Exato
+    default: first_one
+    label:
+      en_US: Mode
+      zh_Hans: 模式
+      pt_BR: Modo
+    human_description:
+      en_US: The mode to extract (first_one or exact_one)
+      zh_Hans: 要提取的模式（first_one 或 exact_one）
+      pt_BR: O modo a ser extraído (first_one ou exact_one)
+    llm_description: The mode to extract (first_one or exact_one)
+    form: form
+  - name: loose
+    type: boolean
+    required: false
+    default: true
+    label:
+      en_US: Loose Mode
+      zh_Hans: 宽松模式
+      pt_BR: Modo Flexível
+    human_description:
+      en_US: If true, will try to extract from generic code blocks if specific format blocks are not found
+      zh_Hans: 如果为 true，当找不到特定格式的代码块时，将尝试从通用代码块中提取
+      pt_BR: Se verdadeiro, tentará extrair de blocos de código genéricos se blocos de formato específico não forem encontrados
+    llm_description: If true, will try to extract from generic code blocks if specific format blocks are not found
+    form: form
+extra:
+  python:
+    source: tools/extract_next_step.py
+
+output_schema:
+  type: object
+  properties:
+    next_step:
+      type: string
+    success:
+      type: boolean

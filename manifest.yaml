@@ -1,0 +1,35 @@
+version: 0.0.1
+type: plugin
+author: eliyar-eziz
+name: markdown-helpers
+label:
+  en_US: markdown-helpers
+  ja_JP: markdown-helpers
+  zh_Hans: markdown-helpers
+  pt_BR: markdown-helpers
+description:
+  en_US: A set of markdown tools to simplify parsing JSON/YAML from LLM response.
+  ja_JP: A set of markdown tools to simplify parsing JSON/YAML from LLM response.
+  zh_Hans: A set of markdown tools to simplify parsing JSON/YAML from LLM response.
+  pt_BR: A set of markdown tools to simplify parsing JSON/YAML from LLM response.
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+plugins:
+  tools:
+    - provider/markdown-helpers.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-03-06T00:02:28.715065+08:00
+privacy: PRIVACY.md
+verified: false
