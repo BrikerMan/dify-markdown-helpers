@@ -34,14 +34,17 @@ class ExtractJsonYamlTool(Tool):
                 mode=mode,
                 loose=loose
             )
-            
+            yield self.create_variable_message("success", "true")
             yield self.create_json_message({
                 "result": parsed_data,
                 "success": True
             })
+            return
         except Exception as e:
+            yield self.create_variable_message("success", "false")
             yield self.create_json_message({
                 "error": str(e),
                 "result": None,
                 "success": False
             })
+            return
